@@ -1,2 +1,2 @@
-Kononov O. V. test task # Idle-Clicker
+Kononov O. V. # Idle-Clicker
 Test task on Unity
