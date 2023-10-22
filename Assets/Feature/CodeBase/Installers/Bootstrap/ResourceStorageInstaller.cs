@@ -18,7 +18,7 @@ namespace Feature.CodeBase.Installers.Bootstrap
             int n = config.Resources.Length;
             ResourceStorage storage = new ResourceStorage(n);
             foreach (var res in config.Resources)
-                storage.AllResources.Add(res);
+                storage.Register(res);
             return storage;
         }
     }

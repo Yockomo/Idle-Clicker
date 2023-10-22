@@ -4,7 +4,7 @@ namespace Feature.CodeBase.GameLogic.Resources
 {
     public class ResourceStorage
     {
-        public HashSet<BaseResource> AllResources { get; private set; }
+        private HashSet<BaseResource> allResources;
 
         public ResourceStorage()
         {
@@ -18,13 +18,13 @@ namespace Feature.CodeBase.GameLogic.Resources
 
         private void InitAllResources(int initialSize)
         {
-            AllResources = new HashSet<BaseResource>(initialSize);
+            allResources = new HashSet<BaseResource>(initialSize);
         }
         
         public void Register(BaseResource resource)
         {
-            if(!AllResources.Contains(resource))
-                AllResources.Add(resource);
+            if(!allResources.Contains(resource))
+                allResources.Add(resource);
         }
     }
 }
