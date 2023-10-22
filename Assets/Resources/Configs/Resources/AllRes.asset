@@ -15,3 +15,8 @@ MonoBehaviour:
   Resources:
   - ResourceName: Raw Wood
   - ResourceName: Lumber
+  Transitions:
+  - FromRes: Raw Wood
+    ToRes: Lumber
+    TransitionCost: 2
+    TransitionTime: 1
