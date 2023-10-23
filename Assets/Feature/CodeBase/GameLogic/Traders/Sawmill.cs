@@ -12,16 +12,14 @@ namespace Feature.CodeBase.GameLogic.Traders
         [SerializeField] private  int outcomeResId;
         
         private ResourceStorage storage;
-        private Trader<BaseResource, BaseResource> trader;
+        private Trader<Wood, Timber> trader;
 
         [Inject]
         private void Init(IResourceHandler resourceHandler, IInventory inventory)
         {
-            string incomeResName = storage.GetResourceNameById(incomeResId);
-            string outcomeResName = storage.GetResourceNameById(outcomeResId);
-            TraderData data = storage.GetTraderData(incomeResName, outcomeResName);
+            TraderData data = storage.GetTraderData(incomeResId, outcomeResId);
             CoroutineRunner runner = new CoroutineRunner(this);
-            trader = new Trader<BaseResource, BaseResource>(data, resourceHandler, inventory, runner);
+            trader = new Trader<Wood, Timber>(data, resourceHandler, inventory, runner);
         }
 
         private void OnTriggerEnter(Collider other)

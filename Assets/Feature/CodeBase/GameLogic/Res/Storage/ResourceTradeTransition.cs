@@ -3,17 +3,17 @@
 namespace Feature.CodeBase.GameLogic.Res
 {
     [Serializable]
-    public struct ResourceTrade
+    public struct ResourceTradeTransition
     {
-        public string FromRes;
-        public string ToRes;
+        public int FromResId;
+        public int ToResId;
         public int TransitionCost;
         public float TransitionTime;
 
-        public ResourceTrade(string fromRes, string toRes, int transitionCost, float transitionTime)
+        public ResourceTradeTransition(int fromResId, int toResId, int transitionCost, float transitionTime)
         {
-            FromRes = fromRes;
-            ToRes = toRes;
+            FromResId = fromResId;
+            ToResId = toResId;
             TransitionCost = transitionCost;
             TransitionTime = transitionTime;
         }

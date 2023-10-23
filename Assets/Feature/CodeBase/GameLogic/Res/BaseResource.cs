@@ -5,16 +5,7 @@ namespace Feature.CodeBase.GameLogic.Res
     [Serializable]
     public class BaseResource
     {
+        public int Id;
         public string ResourceName;
-
-        public BaseResource()
-        {
-            
-        }
-        
-        public BaseResource(string name)
-        {
-            ResourceName = name;
-        }
     }
 }

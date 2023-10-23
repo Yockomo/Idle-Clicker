@@ -8,6 +8,6 @@ namespace Feature.CodeBase.Infrastructure.Res
     {
         public BaseResource[] Resources;
 
-        public ResourceTrade[] Transitions;
+        public ResourceTradeTransition[] Transitions;
     }
 }
