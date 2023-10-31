@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: AllRes
   m_EditorClassIdentifier: 
   Resources:
-  - ResourceName: Raw Wood
-  - ResourceName: Lumber
+  - Id: 0
+    ResourceName: Wood
+  - Id: 1
+    ResourceName: Timber
   Transitions:
-  - FromRes: Raw Wood
-    ToRes: Lumber
+  - FromResId: 0
+    ToResId: 1
     TransitionCost: 2
     TransitionTime: 1

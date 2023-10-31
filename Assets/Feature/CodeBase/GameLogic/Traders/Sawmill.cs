@@ -11,11 +11,10 @@ namespace Feature.CodeBase.GameLogic.Traders
         [SerializeField] private  int incomeResId;
         [SerializeField] private  int outcomeResId;
         
-        private ResourceStorage storage;
         private Trader<Wood, Timber> trader;
 
         [Inject]
-        private void Init(IResourceHandler resourceHandler, IInventory inventory)
+        private void Init(ResourceStorage storage, IResourceHandler resourceHandler, IInventory inventory)
         {
             TraderData data = storage.GetTraderData(incomeResId, outcomeResId);
             CoroutineRunner runner = new CoroutineRunner(this);

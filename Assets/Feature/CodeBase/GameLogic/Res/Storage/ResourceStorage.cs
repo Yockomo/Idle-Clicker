@@ -21,9 +21,9 @@ namespace Feature.CodeBase.GameLogic.Res
             resourceTraders = new Dictionary<string, TraderData>(initialSize / 2);
         }
         
-        public void RegisterResource<T>(T res) where T : BaseResource
+        public void RegisterResource(Type type,  int id)
         {
-            allResources.Add(typeof(T), res.Id);
+            allResources.Add(type, id);
         }
 
         public void RegisterResourceTrade(ResourceTradeTransition tradeTransition)
