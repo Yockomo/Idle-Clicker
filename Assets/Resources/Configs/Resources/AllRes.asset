@@ -19,6 +19,10 @@ MonoBehaviour:
     ResourceName: Timber
   Transitions:
   - FromResId: 0
+    ToResId: 0
+    TransitionCost: 0
+    TransitionTime: 1
+  - FromResId: 0
     ToResId: 1
     TransitionCost: 2
-    TransitionTime: 1
+    TransitionTime: 2

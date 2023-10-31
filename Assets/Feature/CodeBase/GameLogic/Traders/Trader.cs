@@ -13,14 +13,16 @@ namespace Feature.CodeBase.GameLogic.Traders
         private bool stop;
         private TraderData data;
         private IResourceHandler resourceHandler;
-        private IResourceChecker _resourceChecker;
+        private IResourceChecker resourceChecker;
         private CoroutineRunner corRunner;
 
+        public bool Trading { get; private set; }
+        
         public Trader(TraderData data, IResourceHandler resourceHandler, IResourceChecker resourceChecker, CoroutineRunner corRunner)
         {
             this.data = data;
             this.resourceHandler = resourceHandler;
-            this._resourceChecker = resourceChecker;
+            this.resourceChecker = resourceChecker;
             this.corRunner = corRunner;
         }
         
@@ -42,7 +44,7 @@ namespace Feature.CodeBase.GameLogic.Traders
 
         protected virtual void TradeResources(int count)
         {
-            int tResCount = _resourceChecker.GetResourcesCount<T>();
+            int tResCount = resourceChecker.GetResourcesCount<T>();
             if(tResCount < count || !resourceHandler.TryDecreaseResource<T>(count))
                 return;
             corRunner.Runner.StartCoroutine(TradeRes(count));
@@ -52,6 +54,7 @@ namespace Feature.CodeBase.GameLogic.Traders
         {
             int currentT = count;
             int currentG = 0;
+            Trading = true;
             while (currentT > 0 && !stop)
             {
                 yield return new WaitForSeconds(data.TimeForSingleTrade);
@@ -64,6 +67,7 @@ namespace Feature.CodeBase.GameLogic.Traders
             if (currentG > 0)
                 resourceHandler.TryIncreaseResource<G>(currentG);
             stop = false;
+            Trading = false;
         }
     }
 }

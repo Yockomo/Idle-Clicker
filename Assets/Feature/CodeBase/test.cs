@@ -5,6 +5,7 @@ using Feature.CodeBase.Infrastructure.SaveSystem;
 using UnityEngine;
 using Zenject;
 
+//TODO вынести сейв в отдельный класс, сделать класс для UI и смены сцен
 public class test : MonoBehaviour
 {
     private IResSaver saver;
@@ -15,7 +16,6 @@ public class test : MonoBehaviour
     {
         saver = resSaver;
         this.handler = handler;
-        handler.TryIncreaseResource<Wood>(10);
     }
 
     private void OnEnable()

@@ -9,22 +9,21 @@ namespace Feature.CodeBase.GameLogic.Traders
 {
     public class Sawmill : MonoBehaviour
     {
-        [SerializeField] private  int incomeResId;
-        [SerializeField] private  int outcomeResId;
-        
         private Trader<Wood, Timber> trader;
 
         [Inject]
         private void Init(ResourceStorage storage, IResourceHandler resourceHandler, IResourceChecker resourceChecker)
         {
-            TraderData data = storage.GetTraderData(incomeResId, outcomeResId);
+            Wood w = new Wood();
+            Timber t = new Timber();
+            TraderData data = storage.GetTraderData(w.Id, t.Id);
             CoroutineRunner runner = new CoroutineRunner(this);
             trader = new Trader<Wood, Timber>(data, resourceHandler, resourceChecker, runner);
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            if(other.TryGetComponent(out Hero hero))
+            if(!trader.Trading && other.TryGetComponent(out Hero hero))
                 trader.Trade();
         }
     }
