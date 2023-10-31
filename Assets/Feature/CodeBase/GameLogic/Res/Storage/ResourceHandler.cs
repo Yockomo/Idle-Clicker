@@ -4,7 +4,7 @@ using Feature.CodeBase.GameLogic.Inventory;
 
 namespace Feature.CodeBase.GameLogic.Res.Storage
 {
-    public class ResourceHandler : IInventory, IResourceHandler
+    public class ResourceHandler : IResourceChecker, IResourceHandler, IDataHandler
     {
         public event Action<Type, int> OnResoureceCountChangeEvent;
 
@@ -21,6 +21,11 @@ namespace Feature.CodeBase.GameLogic.Res.Storage
             }
         }
         
+        public Dictionary<Type, int> GetCurrentData()
+        {
+            return map;
+        }
+
         public int GetResourcesCount<T>() where T : BaseResource
         {
             if (map.ContainsKey(typeof(T)))

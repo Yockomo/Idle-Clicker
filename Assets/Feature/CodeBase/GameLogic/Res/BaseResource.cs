@@ -7,5 +7,10 @@ namespace Feature.CodeBase.GameLogic.Res
     {
         public int Id;
         public string ResourceName;
+
+        public BaseResource()
+        {
+            
+        }
     }
 }

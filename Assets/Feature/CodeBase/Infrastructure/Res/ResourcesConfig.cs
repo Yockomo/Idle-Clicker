@@ -14,15 +14,15 @@ namespace Feature.CodeBase.Infrastructure.Res
         public void Register()
         {
             Resources = new List<BaseResource>();
-            Wood wood = new Wood();
-            wood.Id = 0;
-            wood.ResourceName = "Wood";
-            Resources.Add(wood);
+            Register<Wood>();
+            Register<Timber>();
+        }
 
-            Timber timber = new Timber();
-            timber.Id = 1;
-            timber.ResourceName = "Timber";
-            Resources.Add(timber);
+        private void Register<T>() where T : new()
+        {
+            T res = new T();
+            if (res is BaseResource resource)
+                Resources.Add(resource);
         }
     }
 }

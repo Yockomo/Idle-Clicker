@@ -1,18 +1,19 @@
 using System;
 using Feature.CodeBase.GameLogic.Inventory;
 using Feature.CodeBase.GameLogic.Res;
+using Feature.CodeBase.Infrastructure.SaveSystem;
 using UnityEngine;
 using Zenject;
 
 public class test : MonoBehaviour
 {
-    private IInventory inventory;
+    private IResSaver saver;
     private IResourceHandler handler;
     
     [Inject]
-    private void Init(IInventory inventory, IResourceHandler handler)
+    private void Init(IResSaver resSaver, IResourceHandler handler)
     {
-        this.inventory = inventory;
+        saver = resSaver;
         this.handler = handler;
         handler.TryIncreaseResource<Wood>(10);
     }
@@ -31,10 +32,9 @@ public class test : MonoBehaviour
     {
         Debug.Log(type.FullName + " " + count);
     }
-    
-    private void Update()
+
+    private void OnDestroy()
     {
-        // Debug.Log("Wood " + inventory.GetResourcesCount<Wood>());
-        // Debug.Log("Timber " + inventory.GetResourcesCount<Timber>());
+        saver.SaveRes();
     }
 }

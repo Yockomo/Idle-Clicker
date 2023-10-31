@@ -75,3 +75,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   config: {fileID: 11400000, guid: 84ce6bd837769284f9d85d0529a26702, type: 2}
+  playerData: {fileID: 11400000, guid: 363618b3a67b317468ca6a026996c5c7, type: 2}

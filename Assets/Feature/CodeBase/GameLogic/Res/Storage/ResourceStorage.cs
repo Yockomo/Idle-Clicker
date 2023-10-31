@@ -7,7 +7,8 @@ namespace Feature.CodeBase.GameLogic.Res
 {
     public class ResourceStorage
     {
-        private Dictionary<Type, int> allResources;
+        private Dictionary<Type, int> allResourcesByType;
+        private Dictionary<int, Type> allResourcesById;
         private Dictionary<string, TraderData> resourceTraders;
 
         public ResourceStorage(int initialSize)
@@ -17,13 +18,15 @@ namespace Feature.CodeBase.GameLogic.Res
 
         private void InitAllResources(int initialSize)
         {
-            allResources = new Dictionary<Type, int>(initialSize);
+            allResourcesByType = new Dictionary<Type, int>(initialSize);
+            allResourcesById = new Dictionary<int, Type>(initialSize);
             resourceTraders = new Dictionary<string, TraderData>(initialSize / 2);
         }
         
         public void RegisterResource(Type type,  int id)
         {
-            allResources.Add(type, id);
+            allResourcesByType.Add(type, id);
+            allResourcesById.Add(id, type);
         }
 
         public void RegisterResourceTrade(ResourceTradeTransition tradeTransition)
@@ -35,14 +38,20 @@ namespace Feature.CodeBase.GameLogic.Res
             resourceTraders.Add(key, data);
         }
 
-        public int GetResourceId<T>() where T : BaseResource
+        public int GetResourceId(Type lol)
         {
-            if (!allResources.ContainsKey(typeof(T)))
-                return -1;
-
-            return allResources[typeof(T)];
+            if(allResourcesByType.ContainsKey(lol)) 
+                return allResourcesByType[lol];
+            return -1;
         }
 
+        public Type GetResourceType(int id)
+        {
+            if (allResourcesById.ContainsKey(id))
+                return allResourcesById[id];
+            return null;
+        }
+        
         public TraderData GetTraderData(int incomeResourceId, int outcomeResourceId)
         {
             string key = CreateResourceTradersKey(incomeResourceId, outcomeResourceId);
