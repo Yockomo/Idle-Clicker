@@ -1,4 +1,5 @@
 ﻿using Feature.CodeBase.GameLogic.Inventory;
+using Feature.CodeBase.GameLogic.Movement;
 using Feature.CodeBase.GameLogic.Res;
 using Feature.CodeBase.Infrastructure.CoroutineRunner;
 using UnityEngine;
@@ -23,7 +24,7 @@ namespace Feature.CodeBase.GameLogic.Traders
 
         private void OnTriggerEnter(Collider other)
         {
-            if(other.CompareTag("Player"))
+            if(other.TryGetComponent(out Hero hero))
                 trader.Trade();
         }
     }

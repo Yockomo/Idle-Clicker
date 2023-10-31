@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using Feature.CodeBase.GameLogic.Inventory;
 using Feature.CodeBase.GameLogic.Res;
 using Feature.CodeBase.Infrastructure.CoroutineRunner;
