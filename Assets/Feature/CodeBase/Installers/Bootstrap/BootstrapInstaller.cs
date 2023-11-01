@@ -3,8 +3,8 @@ using Feature.CodeBase.GameLogic.Res;
 using Feature.CodeBase.GameLogic.Res.Storage;
 using Feature.CodeBase.Infrastructure.Res;
 using Feature.CodeBase.Infrastructure.SaveSystem;
+using Feature.CodeBase.Infrastructure.SceneHandler;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using Zenject;
 
 namespace Feature.CodeBase.Installers.Bootstrap
@@ -16,14 +16,20 @@ namespace Feature.CodeBase.Installers.Bootstrap
         
         public override void InstallBindings()
         {
-            config.Register();
+            RegisterResources();
             ResourceStorage storage = GetFilledStorage();
             Container.Bind<ResourceStorage>().FromInstance(storage).AsSingle().NonLazy();
             IDataHandler dataHandler = InitResourceHandler();         
             InitSaver(dataHandler, storage);
-            SceneManager.LoadScene("SampleScene");
+            SceneHandler sceneHandler = InitSceneHandler();
+            sceneHandler.LoadScene(new MainMenuScene());
         }
 
+        private void RegisterResources()
+        {
+            config.Register();
+        }
+        
         private ResourceStorage GetFilledStorage()
         {
             int n = config.Resources.Count;
@@ -60,6 +66,14 @@ namespace Feature.CodeBase.Installers.Bootstrap
             saver.LoadRes();
             Container.Bind<IResSaver>().FromInstance(saver).AsSingle().NonLazy();
             Container.Bind<IResLoader>().FromInstance(saver).AsSingle().NonLazy();
+            Container.Bind<IResReseter>().FromInstance(saver).AsSingle().NonLazy();
+        }
+
+        private SceneHandler InitSceneHandler()
+        {
+            var handler = new SceneHandler();
+            Container.Bind<ISceneHandler>().FromInstance(handler).AsSingle().NonLazy();
+            return handler;
         }
     }
 }

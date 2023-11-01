@@ -5,7 +5,7 @@ using Feature.CodeBase.GameLogic.Res.Storage;
 
 namespace Feature.CodeBase.Infrastructure.SaveSystem
 {
-    public class ResSaver : IResSaver, IResLoader
+    public class ResSaver : IResSaver, IResLoader, IResReseter
     {
         private Dictionary<Type, int> map;
         private PlayerData playerData;
@@ -32,6 +32,12 @@ namespace Feature.CodeBase.Infrastructure.SaveSystem
                     map.Add(pair.Key, 0);
                 map[pair.Key] = pair.Value;
             }
+        }
+
+        public void ResetResources()
+        {
+            playerData.Keys = new List<int>();
+            playerData.Values = new List<int>();
         }
     }
 }
