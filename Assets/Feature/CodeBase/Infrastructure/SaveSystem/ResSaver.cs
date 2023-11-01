@@ -8,11 +8,13 @@ namespace Feature.CodeBase.Infrastructure.SaveSystem
     public class ResSaver : IResSaver, IResLoader, IResReseter
     {
         private Dictionary<Type, int> map;
+        private IDataHandler dataHandler;
         private PlayerData playerData;
         private ResourceStorage storage;
         
         public ResSaver(IDataHandler dataHandler, PlayerData playerData, ResourceStorage storage)
         {
+            this.dataHandler = dataHandler;
             map = dataHandler.GetCurrentData();
             this.playerData = playerData;
             this.storage = storage;
@@ -36,8 +38,8 @@ namespace Feature.CodeBase.Infrastructure.SaveSystem
 
         public void ResetResources()
         {
-            playerData.Keys = new List<int>();
-            playerData.Values = new List<int>();
+            playerData.Clear();
+            dataHandler.Clear();
         }
     }
 }

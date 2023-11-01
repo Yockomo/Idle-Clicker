@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Feature.CodeBase.GameLogic.Inventory;
 
 namespace Feature.CodeBase.GameLogic.Res.Storage
@@ -24,6 +25,15 @@ namespace Feature.CodeBase.GameLogic.Res.Storage
         public Dictionary<Type, int> GetCurrentData()
         {
             return map;
+        }
+
+        public void Clear()
+        {
+            var keys = map.Keys.ToList();
+            map.Clear();
+            foreach (var k in keys)
+                map.Add(k, 0);
+            
         }
 
         public int GetResourcesCount(Type t)

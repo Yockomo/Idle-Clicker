@@ -14,6 +14,19 @@ namespace Feature.CodeBase.Infrastructure.SaveSystem
 
         private Dictionary<Type, int> map;
         private ResourceStorage storage;
+
+        public void Clear()
+        {
+            for (int i = 0; i < Values.Count; i++)
+            {
+                Values[i] = 0;
+            }
+            foreach (var k in Keys)
+            {
+                Type type = storage.GetResourceType(k);
+                map[type] = 0;
+            }
+        }
         
         public void Save(Dictionary<Type, int> data)
         {
@@ -35,7 +48,7 @@ namespace Feature.CodeBase.Infrastructure.SaveSystem
                 Init(storage);
             return map;
         }
-
+        
         private void Init(ResourceStorage storage)
         {
             map = new Dictionary<Type, int>();
@@ -44,7 +57,7 @@ namespace Feature.CodeBase.Infrastructure.SaveSystem
             if (Values == null)
                 Values = new List<int>();
                 
-            for (int i = 0; i < Keys.Count; i++)
+            for (int i = 0; i < Keys.Count && i < Values.Count; i++)
             {
                 Type type = storage.GetResourceType(Keys[i]);
                 if(!map.ContainsKey(type))
