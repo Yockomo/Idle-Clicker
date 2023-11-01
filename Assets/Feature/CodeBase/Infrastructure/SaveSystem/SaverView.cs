@@ -16,4 +16,9 @@ public class SaverView : MonoBehaviour
     {
         saver.SaveRes();
     }
+
+    private void OnDestroy()
+    {
+        saver.SaveRes();
+    }
 }
