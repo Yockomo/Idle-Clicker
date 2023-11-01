@@ -26,13 +26,23 @@ namespace Feature.CodeBase.GameLogic.Res.Storage
             return map;
         }
 
-        public int GetResourcesCount<T>() where T : BaseResource
+        public int GetResourcesCount(Type t)
         {
-            if (map.ContainsKey(typeof(T)))
-                return map[typeof(T)];
-            return -1;
+            return GetCount(t);
         }
 
+        public int GetResourcesCount<T>()
+        {
+            return GetCount(typeof(T));
+        }
+
+        private int GetCount(Type t)
+        {
+            if (map.ContainsKey(t))
+                return map[t];
+            return 0;
+        }
+        
         public bool TryIncreaseResource<T>(int count) where T : BaseResource
         {
             return TryChangeValue(typeof(T), count);
